@@ -1,0 +1,21 @@
+[
+    {
+      "id": 1,
+      "image": "https://static.vecteezy.com/system/resources/thumbnails/044/280/984/small_2x/stack-of-books-on-a-brown-background-concept-for-world-book-day-photo.jpg",
+      "text": "Welcome to Our Website!",
+      "description": "Discover a world of knowledge and creativity. Explore our collection and find resources that inspire and entertain."
+    },
+    {
+      "id": 2,
+      "image": "https://static.vecteezy.com/system/resources/thumbnails/041/509/305/small_2x/ai-generated-antique-styled-books-arranged-neatly-on-wooden-shelves-concept-of-antiquarian-books-classic-literature-and-home-library-aesthetics-photo.jpeg",
+      "text": "Explore Our Latest Products!",
+      "description": "Browse through our wide range of products, crafted to meet your needs and enhance your everyday experiences."
+    },
+    {
+      "id": 3,
+      "image": "https://thumbs.dreamstime.com/b/tree-grow-up-book-light-shining-as-geting-knowledge-black-background-concept-as-opening-paper-will-see-knowledge-99985621.jpg",
+      "text": "Get Started with Our Services Today!",
+      "description": "Take the first step toward your goals with our services. Join us to grow, learn, and succeed together!"
+    }
+  ]
+  

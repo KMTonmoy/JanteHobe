@@ -1,0 +1,59 @@
+[
+    {
+      "name": "John Doe",
+      "role": "CEO, TechCorp",
+      "feedback": "The service provided by the team has been exceptional! They truly exceeded our expectations in terms of quality and delivery time.",
+      "image": "https://via.placeholder.com/150",
+      "rating": 5
+    },
+    {
+      "name": "Jane Smith",
+      "role": "Product Manager, InnovateX",
+      "feedback": "Their expertise and professionalism are unmatched. I highly recommend them for anyone seeking top-notch solutions.",
+      "image": "https://via.placeholder.com/150",
+      "rating": 4
+    },
+    {
+      "name": "Alice Brown",
+      "role": "Freelancer",
+      "feedback": "Amazing experience working with this team. They delivered everything on time and provided constant support throughout the project.",
+      "image": "https://via.placeholder.com/150",
+      "rating": 5
+    },
+    {
+      "name": "Michael Johnson",
+      "role": "CTO, StartUp Inc.",
+      "feedback": "Their innovative approach and attention to detail helped us achieve our goals effortlessly. A fantastic team to work with!",
+      "image": "https://via.placeholder.com/150",
+      "rating": 5
+    },
+    {
+      "name": "Emily White",
+      "role": "Creative Director, DesignHub",
+      "feedback": "The designs were creative, functional, and aligned perfectly with our brand vision. Truly impressive work!",
+      "image": "https://via.placeholder.com/150",
+      "rating": 5
+    },
+    {
+      "name": "Chris Evans",
+      "role": "Entrepreneur",
+      "feedback": "They delivered a high-quality product that exceeded my expectations. I couldn’t be happier with the results!",
+      "image": "https://via.placeholder.com/150",
+      "rating": 4
+    },
+    {
+      "name": "Sophia Green",
+      "role": "Marketing Manager, BrightCo",
+      "feedback": "Their team is incredibly talented and professional. Our project was completed on time and within budget.",
+      "image": "https://via.placeholder.com/150",
+      "rating": 5
+    },
+    {
+      "name": "Daniel Lee",
+      "role": "Software Engineer",
+      "feedback": "A very smooth and hassle-free experience. They provided excellent support and guidance throughout the project.",
+      "image": "https://via.placeholder.com/150",
+      "rating": 4
+    }
+  ]
+  

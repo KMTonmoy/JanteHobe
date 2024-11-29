@@ -1,0 +1,37 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    // Disable SSR-related warnings for hydration issues
+    "react/no-unstable-nested-components": "off",
+    "react/react-in-jsx-scope": "off", // Off for Next.js as React is automatically imported
+    "react/jsx-uses-react": "off", // Off for Next.js, as React is auto-imported in Next.js
+
+    // Optional: Customize other rules here
+    "no-console": "warn", // Example: Warn on console.log usage in production
+    "react/prop-types": "off" // Example: Turn off prop-types validation if using TypeScript
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020, // Set to a modern version
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "overrides": [
+    {
+      "files": ["pages/**/*", "components/**/*", "lib/**/*"],
+      "rules": {
+        // You can add component-specific or page-specific rules here if needed
+      }
+    }
+  ],
+  "env": {
+    "browser": true, // This ensures the window object is recognized
+    "node": true,
+    "es2020": true
+  }
+}

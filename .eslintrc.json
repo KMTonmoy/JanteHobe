@@ -11,12 +11,14 @@
     "react/jsx-uses-react": "off", // Off for Next.js, as React is auto-imported in Next.js
 
     // Optional: Customize other rules here
-    "no-console": "warn", // Example: Warn on console.log usage in production
+    "no-console": "warn",    "Node":true,
+    // Example: Warn on console.log usage in production
     "react/prop-types": "off" // Example: Turn off prop-types validation if using TypeScript
   },
   "parserOptions": {
     "ecmaVersion": 2020, // Set to a modern version
     "sourceType": "module",
+    "Node":true,
     "ecmaFeatures": {
       "jsx": true
     }
@@ -32,6 +34,8 @@
   "env": {
     "browser": true, // This ensures the window object is recognized
     "node": true,
+    "Node":true,
+
     "es2020": true
   }
 }

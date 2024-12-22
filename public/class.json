@@ -1,0 +1,32 @@
+[
+    {
+        "_id": "1",
+        "className": "Class 6",
+        "description": "Learn the basics of subjects like Math, Science, and English.",
+        "image": "https://via.placeholder.com/150"
+    },
+    {
+        "_id": "2",
+        "className": "Class 7",
+        "description": "Dive deeper into subjects with advanced topics and projects.",
+        "image": "https://via.placeholder.com/150"
+    },
+    {
+        "_id": "3",
+        "className": "Class 8",
+        "description": "Explore new subjects and develop critical thinking skills.",
+        "image": "https://via.placeholder.com/150"
+    },
+    {
+        "_id": "4",
+        "className": "Class 9",
+        "description": "Focus on preparation for higher studies with comprehensive learning.",
+        "image": "https://via.placeholder.com/150"
+    },
+    {
+        "_id": "5",
+        "className": "Class 10",
+        "description": "Master core subjects to excel in your exams and future education.",
+        "image": "https://via.placeholder.com/150"
+    }
+]

@@ -7,9 +7,9 @@ import Link from 'next/link'
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [activeLink, setActiveLink] = useState('Home') // State to track active link
+  const [activeLink, setActiveLink] = useState('Home')
 
-  // Animation Variants
+
   const containerVariants = {
     hidden: { opacity: 0, y: -50 },
     visible: { opacity: 1, y: 0 }
@@ -21,12 +21,12 @@ const Navbar = () => {
   }
 
   const handleLinkClick = link => {
-    setActiveLink(link) // Update the active link on click
+    setActiveLink(link)
   }
 
   return (
     <motion.nav
-      className='bg-white shadow-md sticky top-0 z-50 px-6 py-4 flex justify-between items-center font-inter'
+      className='bg-[#EBF3FF] capitalize shadow-md fixed w-full  top-0 z-50 px-6 py-4 flex justify-between items-center font-inter'
       variants={containerVariants}
       initial='hidden'
       animate='visible'
@@ -56,9 +56,8 @@ const Navbar = () => {
         >
           <Link
             href='/'
-            className={`hover:text-purple-700 ${
-              activeLink === 'Home' ? 'text-purple-700 underline' : ''
-            }`}
+            className={`hover:text-purple-700 ${activeLink === 'Home' ? 'text-purple-700 underline' : ''
+              }`}
             onClick={() => handleLinkClick('Home')}
           >
             Home
@@ -66,18 +65,17 @@ const Navbar = () => {
         </motion.div>
 
         <motion.div
-          key='Courses'
+          key='class'
           whileHover={{ y: -3, color: '#7e22ce' }}
           transition={{ type: 'spring', stiffness: 300 }}
         >
           <Link
-            href='/courses'
-            className={`hover:text-purple-700 ${
-              activeLink === 'Courses' ? 'text-purple-700 underline' : ''
-            }`}
-            onClick={() => handleLinkClick('Courses')}
+            href='/class'
+            className={`hover:text-purple-700 ${activeLink === 'class' ? 'text-purple-700 underline' : ''
+              }`}
+            onClick={() => handleLinkClick('class')}
           >
-            Courses
+            class
           </Link>
         </motion.div>
 
@@ -88,9 +86,8 @@ const Navbar = () => {
         >
           <Link
             href='/about'
-            className={`hover:text-purple-700 ${
-              activeLink === 'About Us' ? 'text-purple-700 underline' : ''
-            }`}
+            className={`hover:text-purple-700 ${activeLink === 'About Us' ? 'text-purple-700 underline' : ''
+              }`}
             onClick={() => handleLinkClick('About Us')}
           >
             About Us
@@ -104,9 +101,8 @@ const Navbar = () => {
         >
           <Link
             href='/services'
-            className={`hover:text-purple-700 ${
-              activeLink === 'Services' ? 'text-purple-700 underline' : ''
-            }`}
+            className={`hover:text-purple-700 ${activeLink === 'Services' ? 'text-purple-700 underline' : ''
+              }`}
             onClick={() => handleLinkClick('Services')}
           >
             Services
@@ -120,9 +116,8 @@ const Navbar = () => {
         >
           <Link
             href='/contact'
-            className={`hover:text-purple-700 ${
-              activeLink === 'Contact' ? 'text-purple-700 underline' : ''
-            }`}
+            className={`hover:text-purple-700 ${activeLink === 'Contact' ? 'text-purple-700 underline' : ''
+              }`}
             onClick={() => handleLinkClick('Contact')}
           >
             Contact
@@ -131,13 +126,15 @@ const Navbar = () => {
       </motion.div>
 
       {/* Login Button */}
-      <motion.button
-        className='hidden lg:block px-6 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg shadow-md hover:from-indigo-600 hover:to-purple-600'
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        Login
-      </motion.button>
+      <Link href={'/login'}>
+        <motion.button
+          className='hidden lg:block px-6 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg shadow-md hover:from-indigo-600 hover:to-purple-600'
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Login
+        </motion.button>
+        </Link>
 
       {/* Mobile Menu Toggle */}
       <button
@@ -149,9 +146,8 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <motion.div
-        className={`fixed top-0 left-0 w-3/4 h-full bg-white shadow-lg p-6 lg:hidden ${
-          isMobileMenuOpen ? 'block' : 'hidden'
-        }`}
+        className={`fixed top-0 left-0 w-3/4 h-full bg-white shadow-lg p-6 lg:hidden ${isMobileMenuOpen ? 'block' : 'hidden'
+          }`}
         variants={mobileMenuVariants}
         initial='hidden'
         animate={isMobileMenuOpen ? 'visible' : 'hidden'}
@@ -165,9 +161,8 @@ const Navbar = () => {
           >
             <Link
               href='/'
-              className={`text-lg font-medium ${
-                activeLink === 'Home' ? 'text-purple-700 underline' : ''
-              }`}
+              className={`text-lg font-medium ${activeLink === 'Home' ? 'text-purple-700 underline' : ''
+                }`}
               onClick={() => handleLinkClick('Home')}
             >
               Home
@@ -175,18 +170,17 @@ const Navbar = () => {
           </motion.div>
 
           <motion.div
-            key='Courses'
+            key='class'
             whileHover={{ x: 10, color: '#7e22ce' }}
             transition={{ type: 'tween', duration: 0.3 }}
           >
             <Link
-              href='/courses'
-              className={`text-lg font-medium ${
-                activeLink === 'Courses' ? 'text-purple-700 underline' : ''
-              }`}
-              onClick={() => handleLinkClick('Courses')}
+              href='/class'
+              className={`text-lg font-medium ${activeLink === 'class' ? 'text-purple-700 underline' : ''
+                }`}
+              onClick={() => handleLinkClick('class')}
             >
-              Courses
+              Class
             </Link>
           </motion.div>
 
@@ -197,9 +191,8 @@ const Navbar = () => {
           >
             <Link
               href='/about'
-              className={`text-lg font-medium ${
-                activeLink === 'About Us' ? 'text-purple-700 underline' : ''
-              }`}
+              className={`text-lg font-medium ${activeLink === 'About Us' ? 'text-purple-700 underline' : ''
+                }`}
               onClick={() => handleLinkClick('About Us')}
             >
               About Us
@@ -213,9 +206,8 @@ const Navbar = () => {
           >
             <Link
               href='/services'
-              className={`text-lg font-medium ${
-                activeLink === 'Services' ? 'text-purple-700 underline' : ''
-              }`}
+              className={`text-lg font-medium ${activeLink === 'Services' ? 'text-purple-700 underline' : ''
+                }`}
               onClick={() => handleLinkClick('Services')}
             >
               Services
@@ -229,9 +221,8 @@ const Navbar = () => {
           >
             <Link
               href='/contact'
-              className={`text-lg font-medium ${
-                activeLink === 'Contact' ? 'text-purple-700 underline' : ''
-              }`}
+              className={`text-lg font-medium ${activeLink === 'Contact' ? 'text-purple-700 underline' : ''
+                }`}
               onClick={() => handleLinkClick('Contact')}
             >
               Contact

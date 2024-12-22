@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { FaTable, FaTh } from 'react-icons/fa';
 
 const Page = () => {
     const [classInfo, setClassInfo] = useState([]);
@@ -31,12 +32,18 @@ const Page = () => {
         <div className="min-h-screen bg-gray-50 p-8">
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-4xl font-semibold text-center text-gray-800 w-full">Class-wise Learning</h1>
-                <button
+                <motion.button
                     onClick={toggleLayout}
                     className="bg-purple-600 text-white py-2 px-6 rounded-full hover:bg-purple-700 transition duration-300"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                 >
-                    Toggle Layout
-                </button>
+                    {isTableLayout ? (
+                        <FaTh size={20} />
+                    ) : (
+                        <FaTable size={20} />
+                    )}
+                </motion.button>
             </div>
 
             <div className="flex justify-center mb-6">
@@ -67,14 +74,14 @@ const Page = () => {
                         </thead>
                         <tbody>
                             {filteredClassInfo.map((classItem, index) => (
-                                <motion.tr 
-                                    key={index} 
+                                <motion.tr
+                                    key={index}
                                     className="border-b"
-                                    initial={{ opacity: 0, x: -100 }} // Initial position: hidden to the left
-                                    animate={{ opacity: 1, x: 0 }} // Animate to normal position
-                                    transition={{ 
+                                    initial={{ opacity: 0, x: -100 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{
                                         duration: 0.5,
-                                        delay: index * 0.2 // Delay each item by 0.2 seconds based on its index
+                                        delay: index * 0.2
                                     }}
                                 >
                                     <td className="px-6 py-4">
@@ -97,21 +104,21 @@ const Page = () => {
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredClassInfo.map((classItem, index) => (
-                        <motion.div 
-                            key={index} 
+                        <motion.div
+                            key={index}
                             className="bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300"
-                            initial={{ opacity: 0, x: -100 }} // Initial position: hidden to the left
-                            animate={{ opacity: 1, x: 0 }} // Animate to normal position
-                            transition={{ 
+                            initial={{ opacity: 0, x: -100 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{
                                 duration: 0.5,
-                                delay: index * 0.2 // Delay each item by 0.2 seconds based on its index
+                                delay: index * 0.2
                             }}
                         >
                             <img src={classItem.image || 'https://via.placeholder.com/150'} alt={classItem.className} className="w-full h-40 object-cover" />
                             <div className="p-6">
                                 <h2 className="text-2xl font-semibold text-gray-800">{classItem.className}</h2>
                                 <p className="text-gray-600 mt-2">{classItem.description}</p>
-                                <Link href={classItem._id}>
+                                <Link href={`/class/${classItem._id}`}>
                                     <button className="mt-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-2 px-6 rounded-full hover:from-purple-700 hover:to-indigo-700 transition duration-300">
                                         Read Now
                                     </button>

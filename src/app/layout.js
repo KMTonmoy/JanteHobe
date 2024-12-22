@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
           <nav >
             <Navbar />
           </nav>
-          <main className="min-h-[80vh] mt-24">
+          <main className="min-h-[80vh] max-w-7xl mx-auto mt-24">
             {children}
           </main>
           <footer>

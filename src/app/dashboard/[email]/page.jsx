@@ -2,8 +2,8 @@
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 
-const page = ({ params }) => {
-    const { email } =  params;
+const Page = ({ params }) => { // Renamed `page` to `Page`
+    const { email } = params;
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -127,7 +127,7 @@ const page = ({ params }) => {
                 transition={{ duration: 0.5 }}
             >
                 <button
-                    onClick={() => window.location.href = '/dashboard'}  
+                    onClick={() => window.location.href = '/dashboard'}
                     className="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 transition duration-300"
                 >
                     Back to Dashboard
@@ -137,4 +137,4 @@ const page = ({ params }) => {
     );
 };
 
-export default page;
+export default Page;  // Updated export to match the new component name

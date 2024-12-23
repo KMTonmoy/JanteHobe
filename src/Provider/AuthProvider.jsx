@@ -1,5 +1,6 @@
 'use client';
-import axios from 'axios';
+import { createContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import {
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
@@ -10,9 +11,8 @@ import {
     signOut,
     updateProfile,
 } from 'firebase/auth';
-import { useRouter } from 'next/navigation';
-import { createContext, useEffect, useState } from 'react';
 import { app } from '../firebase/firebase.config';
+import axios from 'axios';
 
 export const AuthContext = createContext(null);
 
@@ -30,6 +30,7 @@ const AuthProvider = ({ children }) => {
             await createUserWithEmailAndPassword(auth, email, password);
             router.push('/');
         } catch (error) {
+            console.error('Error creating user:', error);
             throw error;
         } finally {
             setLoading(false);
@@ -42,6 +43,7 @@ const AuthProvider = ({ children }) => {
             await signInWithEmailAndPassword(auth, email, password);
             router.push('/');
         } catch (error) {
+            console.error('Error signing in:', error);
             throw error;
         } finally {
             setLoading(false);
@@ -54,6 +56,7 @@ const AuthProvider = ({ children }) => {
             await signInWithPopup(auth, googleProvider);
             router.push('/');
         } catch (error) {
+            console.error('Error signing in with Google:', error);
             throw error;
         } finally {
             setLoading(false);
@@ -69,6 +72,7 @@ const AuthProvider = ({ children }) => {
             await signOut(auth);
             router.push('/login');
         } catch (error) {
+            console.error('Error logging out:', error);
             throw error;
         } finally {
             setLoading(false);
@@ -82,24 +86,26 @@ const AuthProvider = ({ children }) => {
                 photoURL: photo,
             });
         } catch (error) {
+            console.error('Error updating user profile:', error);
             throw error;
         }
     };
 
-    const saveUser = async (user) => {
+    const saveUser = async user => {
         try {
             const existingUserResponse = await axios.get(
                 `http://localhost:8000/users/${user?.email}`
             );
-            if (existingUserResponse.data) {
-                return existingUserResponse.data;
+            const existingUser = existingUserResponse.data;
+
+            if (existingUser) {
+                return existingUser;
             }
+
             const currentUser = {
                 email: user?.email,
                 name: user?.displayName,
                 photo: user?.photoURL,
-                password: user?.password,
-                contactno: user?.contactno,
                 role: 'user',
             };
             const { data } = await axios.put(
@@ -108,19 +114,24 @@ const AuthProvider = ({ children }) => {
             );
             return data;
         } catch (error) {
+            console.error('Error saving user:', error);
             throw error;
         }
     };
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+        const unsubscribe = onAuthStateChanged(auth, async currentUser => {
             setUser(currentUser);
             if (currentUser) {
-                try {
-                    await saveUser(currentUser);
-                } catch (error) {
-                    console.error('Error handling auth state change:', error);
-                }
+                setTimeout(async () => {
+                    try {
+                        await saveUser(currentUser);
+                    } catch (error) {
+                        console.error('Error handling auth state change:', error);
+                    }
+                }, 5000); // Delayed save operation for 5 seconds
+            } else {
+                // If there is no current user, you might not need this logic
             }
             setLoading(false);
         });

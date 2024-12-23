@@ -11,4 +11,33 @@ body {
 
 
 
+ /* Tailwind CSS classes for hover dropdown effect */
+
+.custom-link-text::after {
+  content: attr(data-url); /* Show the URL */
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f5f5f5;
  
+  border: 1px solid #ddd;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #333;
+  white-space: nowrap;
+  visibility: hidden;  
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+ .custom-link-text:hover::after {
+  visibility: visible;
+  opacity: 1;
+}
+
+ .custom-link-text {
+  position: relative;
+  display: inline-block;
+}

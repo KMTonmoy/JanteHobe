@@ -1,11 +1,54 @@
 'use client';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-
+import { AuthContext } from '@/Provider/AuthProvider';
+import useAxiosPublic from '@/Hooks/useAxiosPublic';
 const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+
+
+    const { signIn, signInWithGoogle } = useContext(AuthContext);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    const axiosPublic = useAxiosPublic();
+
+    const handleLogin = async e => {
+        e.preventDefault();
+        setError(null);
+        setLoading(true);
+        try {
+            await signIn(email, password);
+
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleGoogleLogin = async () => {
+        try {
+            const result = await signInWithGoogle();
+            if (result && result.user) {
+                const userInfo = {
+                    email: result.user.email || '',
+                    name: result.user.displayName || '',
+                };
+                await axiosPublic.post('/users', userInfo);
+            }
+        } catch (error) {
+            console.error('Error during Google sign-in:', error);
+            setError(`Google sign-in failed: ${error.message || 'Unknown error'}`);
+        }
+    };
+
+
 
     return (
         <div className='flex justify-center py-10'>
@@ -15,7 +58,7 @@ const LoginPage = () => {
                     <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                         <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Login</h2>
 
-                        <form className="space-y-4">
+                        <form className="space-y-4" onSubmit={handleLogin}>
 
 
                             <div>
@@ -23,7 +66,9 @@ const LoginPage = () => {
                                 <input
                                     type="email"
                                     id="email"
-                                    name="email"
+                                    value={email}
+                                    onChange={e => setEmail(e.target.value)}
+                                    required
                                     placeholder="Enter your email"
                                     className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 />
@@ -37,8 +82,10 @@ const LoginPage = () => {
                                 <div className="relative">
                                     <input
                                         type={showPassword ? 'text' : 'password'}
+
                                         id="password"
-                                        name="password"
+                                        value={password}
+                                        onChange={e => setPassword(e.target.value)}
                                         placeholder="Enter your password"
                                         className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                     />
@@ -68,18 +115,15 @@ const LoginPage = () => {
 
                             <div className="flex gap-4">
                                 <button
+                                    onClick={handleGoogleLogin}
+
                                     className="w-full flex items-center justify-center gap-2 py-2 border border-gray-300 rounded-md text-gray-800 hover:bg-gray-100 transition"
                                 >
                                     <Image src="/google.png" alt="Google logo" width={20} height={20} />
                                     <span>Google</span>
                                 </button>
 
-                                <button
-                                    className="w-full flex items-center justify-center gap-2 py-2 border border-gray-300 rounded-md text-gray-800 hover:bg-gray-100 transition"
-                                >
-                                    <Image src="/fb.png" alt="Facebook logo" width={20} height={20} />
-                                    <span>Facebook</span>
-                                </button>
+
                             </div>
 
 

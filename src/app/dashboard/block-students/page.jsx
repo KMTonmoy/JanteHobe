@@ -11,7 +11,7 @@ const Page = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch("http://localhost:8000/users");
+                const response = await fetch("https://jantehobeback.vercel.app/users");
                 if (!response.ok) {
                     throw new Error("Failed to fetch users");
                 }
@@ -29,7 +29,7 @@ const Page = () => {
     const handleBlockUser = async (email) => {
         try {
             const response = await fetch(
-                `http://localhost:8000/users/${email}`,
+                `https://jantehobeback.vercel.app/users/${email}`,
                 {
                     method: "PATCH",
                     headers: {

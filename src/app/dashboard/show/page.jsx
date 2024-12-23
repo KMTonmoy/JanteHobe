@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Page = () => {
     const [editorContents, setEditorContents] = useState([]);
@@ -10,7 +10,7 @@ const Page = () => {
         // Fetch saved editor content from the API
         const fetchEditorContent = async () => {
             try {
-                const response = await fetch('http://localhost:8000/editor-content'); // Replace with your actual API endpoint
+                const response = await fetch('https://jantehobeback.vercel.app/editor-content'); // Replace with your actual API endpoint
                 if (!response.ok) {
                     throw new Error('Failed to fetch editor content');
                 }

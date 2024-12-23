@@ -1,6 +1,6 @@
 'use client'
-import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
 
 const page = ({ params }) => {
     const { email } = React.use(params);
@@ -11,7 +11,7 @@ const page = ({ params }) => {
     useEffect(() => {
         const fetchUserDetails = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/users/${email}`);
+                const response = await fetch(`https://jantehobeback.vercel.app/users/${email}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch user details');
                 }

@@ -13,7 +13,7 @@ const Page = ({ params }) => {
     useEffect(() => {
         const fetchEditorContent = async () => {
             try {
-                const response = await fetch('http://localhost:8000/editor-content');
+                const response = await fetch('https://jantehobeback.vercel.app/editor-content');
                 if (!response.ok) {
                     throw new Error('Failed to fetch editor content');
                 }

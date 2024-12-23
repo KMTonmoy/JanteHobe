@@ -1,6 +1,5 @@
 'use client';
-import { createContext, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import axios from 'axios';
 import {
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
@@ -11,8 +10,9 @@ import {
     signOut,
     updateProfile,
 } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
+import { createContext, useEffect, useState } from 'react';
 import { app } from '../firebase/firebase.config';
-import axios from 'axios';
 
 export const AuthContext = createContext(null);
 
@@ -66,7 +66,7 @@ const AuthProvider = ({ children }) => {
     const logOut = async () => {
         setLoading(true);
         try {
-            await axios.get(`http://localhost:8000/logout`, {
+            await axios.get(`https://jantehobeback.vercel.app/logout`, {
                 withCredentials: true,
             });
             await signOut(auth);
@@ -94,7 +94,7 @@ const AuthProvider = ({ children }) => {
     const saveUser = async user => {
         try {
             const existingUserResponse = await axios.get(
-                `http://localhost:8000/users/${user?.email}`
+                `https://jantehobeback.vercel.app/users/${user?.email}`
             );
             const existingUser = existingUserResponse.data;
 
@@ -109,7 +109,7 @@ const AuthProvider = ({ children }) => {
                 role: 'user',
             };
             const { data } = await axios.put(
-                `http://localhost:8000/user`,
+                `https://jantehobeback.vercel.app/user`,
                 currentUser
             );
             return data;

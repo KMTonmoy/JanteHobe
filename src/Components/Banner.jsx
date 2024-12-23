@@ -1,12 +1,12 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const Banner = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [slides, setSlides] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:8000/banners')
+    fetch('https://jantehobeback.vercel.app/banners')
       .then(response => response.json())
       .then(data => setSlides(data))
       .catch(error => console.error('Error fetching banner data:', error))

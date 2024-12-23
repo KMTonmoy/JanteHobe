@@ -1,21 +1,18 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
-import {
-    FaHome,
-    FaUserCircle,
-    FaCogs,
-    FaTicketAlt,
-    FaSignOutAlt,
-    FaBars,
-    FaTimes,
-    FaUsers,
-    FaBan,
-    FaBook,
-    FaEdit,
-    FaLock,
-} from "react-icons/fa";
-import Link from "next/link";
 import { AuthContext } from "@/Provider/AuthProvider";
+import Link from "next/link";
+import { useContext, useEffect, useState } from "react";
+import {
+    FaBan,
+    FaBars,
+    FaBook,
+    FaCogs,
+    FaEdit,
+    FaHome,
+    FaLock,
+    FaSignOutAlt,
+    FaTimes
+} from "react-icons/fa";
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +25,7 @@ const Sidebar = () => {
 
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:8000/users/${email}`)
+            fetch(`https://jantehobeback.vercel.app/users/${email}`)
                 .then((res) => res.json())
                 .then(setData)
                 .catch(console.error);

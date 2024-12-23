@@ -52,7 +52,7 @@ const Page = () => {
             setBannerImage(imageUrl);
 
             const response = await axios.post(
-                'http://localhost:8000/banners',
+                'https://jantehobeback.vercel.app/banners',
                 {
                     url: imageUrl,
                     heading: title,

@@ -1,7 +1,7 @@
 'use client'
 import { AuthContext } from '@/Provider/AuthProvider';
 import Link from 'next/link';
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 const DashboardPage = () => {
     const [data, setData] = useState([]);
@@ -17,7 +17,7 @@ const DashboardPage = () => {
 
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:8000/users/${email}`)
+            fetch(`https://jantehobeback.vercel.app/users/${email}`)
                 .then((res) => res.json())
                 .then(setData)
                 .catch(console.error);
@@ -27,7 +27,7 @@ const DashboardPage = () => {
     useEffect(() => {
         // Fetching counts for blocked users, total users, and total classes
         if (role === 'admin') {
-            fetch('http://localhost:8000/users') // Fetch all users
+            fetch('https://jantehobeback.vercel.app/users') // Fetch all users
                 .then(res => res.json())
                 .then(users => {
                     setUsers(users);
@@ -36,7 +36,7 @@ const DashboardPage = () => {
                 })
                 .catch(console.error);
 
-            fetch('http://localhost:8000/classes') // Fetch all classes
+            fetch('https://jantehobeback.vercel.app/classes') // Fetch all classes
                 .then(res => res.json())
                 .then(classes => setTotalClasses(classes.length))
                 .catch(console.error);
@@ -44,7 +44,7 @@ const DashboardPage = () => {
     }, [role]);
 
     const handleBlockUser = (userId) => {
-        fetch(`http://localhost:8000/users/${userId}`, {
+        fetch(`https://jantehobeback.vercel.app/users/${userId}`, {
             method: 'PATCH',
             body: JSON.stringify({ status: 'blocked' }),
             headers: {

@@ -127,15 +127,13 @@
 
 
 
-
 'use client'
 import dynamic from 'next/dynamic';
+import { useState } from 'react';
 
 const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false });
-import { useRef, useState } from 'react';
 
 const Page = () => {
-    const editor = useRef(null);
     const [content, setContent] = useState('');
     const [statusMessage, setStatusMessage] = useState('');
     const [className, setClassName] = useState('');
@@ -169,6 +167,12 @@ const Page = () => {
     const saveContent = async () => {
         if (!content || !className || !chapterName || !chapterNo) {
             setStatusMessage('Please fill all fields: class, chapter name, chapter number, and content.');
+            return;
+        }
+
+        // Ensure chapter number is a valid number
+        if (isNaN(chapterNo)) {
+            setStatusMessage('Please enter a valid chapter number.');
             return;
         }
 
@@ -232,11 +236,9 @@ const Page = () => {
             </div>
 
             <JoditEditor
-                ref={editor}
                 value={content}
                 config={config}
                 onBlur={(newContent) => setContent(newContent)}
-                onChange={(newContent) => { }}
             />
 
             <button

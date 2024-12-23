@@ -37,7 +37,6 @@ const Sidebar = () => {
 
     const commonLinks = [
         { name: "Home", icon: <FaHome />, path: "/dashboard" },
-        { name: "Profile", icon: <FaUserCircle />, path: "/dashboard/profile" },
     ];
 
     const adminLinks = [

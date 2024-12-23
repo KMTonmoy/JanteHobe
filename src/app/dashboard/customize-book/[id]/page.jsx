@@ -1,63 +1,76 @@
-'use client'
-import React, { useState, useEffect } from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
 const Page = ({ params }) => {
-    const { id } = React.use(params);  // Unwrap params here
-    const [content, setContent] = useState(null);
-    const [statusMessage, setStatusMessage] = useState('');
+    const { id } = React.use(params);
+
+    const [editorContents, setEditorContents] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [selectedContent, setSelectedContent] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
 
     const randomMessages = {
         confirmMessages: [
-            'You really want to delete this? 🤨😳',
-            'Oh no! This will be gone forever! 💔😱',
-            'Are you sure you want to delete this chapter? 🤔🧐😞',
-            'Time to say goodbye 😔👋',
-            'This might be a bad idea! 😬😓',
+            'Are you sure you want to delete this? 🤔',
+            'This will be gone forever! 💔',
+            'Deleting this will be a bad idea! 😬',
+            'Do you really want to delete this chapter? 😳',
+            'Once deleted, it\'s gone! 😱'
         ],
         cancelMessages: [
-            'Content saved! 😅🎉',
-            'Phew! That was close! 😮💨',
-            'Content is safe, no worries! 😌✌️',
-            'Nice save! 😎🔥',
-            'Lucky! Content is still here! 😏💪',
+            'Content saved! 😅',
+            'Phew, that was close! 😅',
+            'Content is safe, no worries! 😌',
+            'Lucky, content is still here! 🙌',
+            'Content remains intact! ✌️'
         ],
         successMessages: [
-            'Content deleted! 🥲💔',
-            'It\'s gone now! 😭💥',
-            'Content erased! 😔😔',
-            'Oh no! It\'s gone forever! 😢💔',
-            'Bye-bye content! 👋😩',
+            'Content deleted! 🥲',
+            'Chapter erased! 😞',
+            'Content gone forever! 😢',
+            'Goodbye, chapter! 😔',
+            'The chapter is now deleted! 💥'
         ],
         errorMessages: [
-            'Error deleting content! 😞❌',
-            'Oops, something went wrong! 🤦‍♂️😓',
-            'Failed to delete! 😡😩',
-            'Whoops! Deletion failed! 🙈😫',
+            'Error deleting content! 😞',
+            'Oops, something went wrong! 🙁',
+            'Failed to delete! 😫',
+            'Something went wrong while deleting! 😔'
         ]
     };
 
     useEffect(() => {
-        const fetchContent = async () => {
+        const fetchEditorContent = async () => {
             try {
                 const response = await fetch('http://localhost:8000/editor-content');
-                const data = await response.json();
-                const classContent = data.find(item => item.className === `Class ${id}`);
-
-                if (classContent) {
-                    setContent(classContent);
-                } else {
-                    setStatusMessage('No content found for this class.');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch editor content');
                 }
-            } catch (error) {
-                setStatusMessage('Error fetching content.');
+                const data = await response.json();
+                setEditorContents(data);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
             }
         };
 
-        fetchContent();
-    }, [id]);
+        fetchEditorContent();
+    }, []);
 
-    const handleDelete = async () => {
+    const removeLinkStyles = (content) => {
+        return content.replace(/<a[^>]*href="([^"]*)"[^>]*>([^<]+)<\/a>/g, (match, url, text) => {
+            return `<span class="custom-link-text relative inline-block text-blue-500 cursor-pointer" data-url="${url}">${text}</span>`;
+        });
+    };
+
+    const filteredContent = editorContents.filter(content => 
+        content.className === id && content.chapterName.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const handleDelete = async (content) => {
         const randomConfirmMessage = randomMessages.confirmMessages[Math.floor(Math.random() * randomMessages.confirmMessages.length)];
         const result = await Swal.fire({
             title: 'Are you sure?',
@@ -80,15 +93,15 @@ const Page = ({ params }) => {
 
                 if (response.ok) {
                     const randomSuccessMessage = randomMessages.successMessages[Math.floor(Math.random() * randomMessages.successMessages.length)];
-                    setStatusMessage(randomSuccessMessage);
-                    setContent(null);
+                    setError(randomSuccessMessage);
+                    setEditorContents(editorContents.filter(item => item._id !== content._id));
                 } else {
                     const randomErrorMessage = randomMessages.errorMessages[Math.floor(Math.random() * randomMessages.errorMessages.length)];
-                    setStatusMessage(randomErrorMessage);
+                    setError(randomErrorMessage);
                 }
             } catch (error) {
                 const randomErrorMessage = randomMessages.errorMessages[Math.floor(Math.random() * randomMessages.errorMessages.length)];
-                setStatusMessage(randomErrorMessage);
+                setError(randomErrorMessage);
             }
         } else {
             const randomCancelMessage = randomMessages.cancelMessages[Math.floor(Math.random() * randomMessages.cancelMessages.length)];
@@ -97,24 +110,54 @@ const Page = ({ params }) => {
     };
 
     return (
-        <div className="p-10 w-full bg-gray-100 min-h-screen">
-            <h1 className="text-2xl font-bold mb-4">{`Class ${id} Content`}</h1>
+        <div className="w-full p-10 bg-gray-100 min-h-screen">
+            <h1 className="text-2xl font-bold mb-4">Saved Editor Content</h1>
+            {loading && <p>Loading...</p>}
+            {error && <p className="text-red-500">{error}</p>}
 
-            {statusMessage && <p className="text-red-500 mb-4">{statusMessage}</p>}
+            <div className="mb-6">
+                <input
+                    type="text"
+                    className="p-2 w-full max-w-sm border rounded-md"
+                    placeholder="Search by Chapter Name"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
+            </div>
 
-            {content ? (
-                <div className="p-4 border border-gray-300 rounded-lg bg-white">
-                    <h2 className="text-lg font-semibold">Chapter: {content.chapterName}</h2>
-                    <div dangerouslySetInnerHTML={{ __html: content.content }}></div>
-                    <button
-                        onClick={handleDelete}
-                        className="mt-4 px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-                    >
-                        Delete
-                    </button>
+            {!selectedContent ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredContent.length > 0 ? (
+                        filteredContent.map((contentData) => (
+                            <div key={contentData.id} className="border border-gray-300 rounded-lg p-4 bg-white">
+                                <h3 className="text-lg font-semibold">{contentData.chapterName}</h3>
+                                <p>Chapter No: {contentData.chapterNo}</p>
+                                <button
+                                    className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                                    onClick={() => handleDelete(contentData)}
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No content found for this class.</p>
+                    )}
                 </div>
             ) : (
-                <p>No content found for this class.</p>
+                <div className="p-4 border border-gray-300 rounded-lg bg-white mt-4">
+                    <h2 className="text-xl font-medium mb-4">Chapter: {selectedContent.chapterName} (Chapter {selectedContent.chapterNo})</h2>
+                    <div
+                        className="prose"
+                        dangerouslySetInnerHTML={{ __html: removeLinkStyles(selectedContent.content) }}
+                    ></div>
+                    <button
+                        className="mt-4 px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+                        onClick={() => setSelectedContent(null)}
+                    >
+                        Back to List
+                    </button>
+                </div>
             )}
         </div>
     );

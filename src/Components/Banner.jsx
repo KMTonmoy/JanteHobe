@@ -6,7 +6,7 @@ const Banner = () => {
   const [slides, setSlides] = useState([])
 
   useEffect(() => {
-    fetch('/banner.json')
+    fetch('http://localhost:8000/banners')
       .then(response => response.json())
       .then(data => setSlides(data))
       .catch(error => console.error('Error fetching banner data:', error))
@@ -39,13 +39,13 @@ const Banner = () => {
         {slides.map(slide => (
           <div key={slide.id} className='w-full h-full flex-shrink-0 relative'>
             <img
-              src={slide.image}
+              src={slide.url}
               alt={slide.text}
               className='w-full h-full object-cover'
             />
             <div className='absolute inset-0 flex items-center pl-12 bg-black bg-opacity-50'>
               <div className='max-w-lg text-white space-y-4 md:ml-10 md:text-left text-center'>
-                <h2 className='text-2xl md:text-4xl font-bold'>{slide.text}</h2>
+                <h2 className='text-2xl md:text-4xl font-bold'>{slide.heading}</h2>
                 <p className='text-base md:text-lg'>{slide.description}</p>
               </div>
             </div>

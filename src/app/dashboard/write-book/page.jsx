@@ -34,7 +34,6 @@ const Page = () => {
         }
     };
 
-    // Save content to the server with additional data
     const saveContent = async () => {
         if (!content || !className || !chapterName || !chapterNo) {
             setStatusMessage('Please fill all fields: class, chapter name, chapter number, and content.');
@@ -66,7 +65,6 @@ const Page = () => {
         <div className='w-full p-10 bg-gray-100 min-h-screen'>
             <h1 className='text-2xl font-bold mb-4'>Enhanced Word Editor</h1>
 
-            {/* Select Class, Chapter Name, and Chapter No */}
             <div className='mb-6'>
                 <label className='block text-lg font-medium mb-2'>Class:</label>
                 <select
@@ -101,7 +99,6 @@ const Page = () => {
                 />
             </div>
 
-            {/* Jodit Editor */}
             <JoditEditor
                 ref={editor}
                 value={content}
@@ -110,15 +107,8 @@ const Page = () => {
                 onChange={(newContent) => { }}
             />
 
-            {/* <div className='mt-6'>
-                <h2 className='text-lg font-medium mb-2'>Editor Output:</h2>
-                <div className='p-4 border border-gray-300 rounded-lg bg-white'>
-                    {content}
-                </div>
-            </div> */}
-
             <button
-                className='mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600'
+                className='mt-4 px-6 py-2 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none'
                 onClick={saveContent}
             >
                 Save Content

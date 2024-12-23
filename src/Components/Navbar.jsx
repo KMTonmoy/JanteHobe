@@ -52,7 +52,7 @@ const Navbar = () => {
         className="hidden lg:flex gap-6 text-gray-700"
         whileHover={{ opacity: 1 }}
       >
-        {['Home', 'class', 'About Us', 'Services', 'Contact'].map((link) => (
+        {['Home', 'class', 'About Us', 'Services', 'Contact',].map((link) => (
           <motion.div
             key={link}
             whileHover={{ y: -3, color: '#7e22ce' }}
@@ -67,6 +67,15 @@ const Navbar = () => {
             </Link>
           </motion.div>
         ))}
+        {user && (
+          <Link
+            href='/dashboard'
+            className={`hover:text-purple-700 `}
+         
+          >
+            Dashboard
+          </Link>
+        )}
       </motion.div>
 
       {/* User Profile or Login */}

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
 const Page = ({ params }) => {
-    const { id } = React.use(params);
+    const { id } =  params;
 
     const [editorContents, setEditorContents] = useState([]);
     const [loading, setLoading] = useState(true);

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 
 const page = ({ params }) => {
-    const { email } = React.use(params);
+    const { email } =  params;
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

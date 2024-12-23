@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 
 const Page = ({ params }) => {
-    const { _id } = React.use(params);
+    const { _id } =  params;
 
     const [editorContents, setEditorContents] = useState([]);
     const [loading, setLoading] = useState(true);

@@ -109,7 +109,7 @@ const Page = () => {
             >
               <div className="flex items-center space-x-4">
                 <img
-                  src="https://static.vecteezy.com/system/resources/thumbnails/004/607/791/small_2x/man-face-emotive-icon-smiling-male-character-in-blue-shirt-flat-illustration-isolated-on-white-happy-human-psychological-portrait-positive-emotions-user-avatar-for-app-web-design-vector.jpg"
+                  src={user.photo}
                   alt="Profile"
                   className="w-14 h-14 rounded-full"
                 />

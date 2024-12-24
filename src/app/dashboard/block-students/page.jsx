@@ -65,7 +65,6 @@ const Page = () => {
         }
     };
 
-
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     };
@@ -87,7 +86,7 @@ const Page = () => {
     }
 
     return (
-        <div className="p-6 h-[100%] overflow-y-auto">
+        <div className="p-6 w-full h-[100%] overflow-y-auto">
             <h2 className="text-2xl font-semibold mb-4">Manage Users</h2>
             <input
                 type="text"
@@ -96,36 +95,46 @@ const Page = () => {
                 onChange={handleSearchChange}
                 className="w-full p-2 mb-4 border border-gray-300 rounded outline-none"
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredUsers
-                    .filter((user) => user.role === "user")
-                    .map((user) => (
-                        <div
-                            key={user.email}
-                            className="bg-white shadow-md rounded-lg p-4 flex items-center justify-between"
-                        >
-                            <div className="flex items-center">
-                                <img
-                                    src={user.photo}
-                                    alt="Profile"
-                                    className="w-12 h-12 rounded-full"
-                                />
-                                <div className="ml-4">
-                                    <h3 className="text-lg font-medium">{user.name}</h3>
-                                    <p className="text-gray-500">{user.email}</p>
-                                </div>
-                            </div>
-                            <div className="flex items-center">
-                                <button
-                                    className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded mr-2"
-                                    onClick={() => handleBlockUser(user.email)}
-                                >
-                                    Block
-                                </button>
-
-                            </div>
-                        </div>
-                    ))}
+            <div className="bg-white shadow-md rounded-lg p-4">
+                <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-100">
+                        <tr>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Photo</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                        {filteredUsers
+                            .filter((user) => user.role === "user")
+                            .map((user) => (
+                                <tr key={user.email} className="hover:bg-gray-50">
+                                    <td className="px-6 py-4">
+                                        <img
+                                            src={user.photo}
+                                            alt="Profile"
+                                            className="w-12 h-12 rounded-full"
+                                        />
+                                    </td>
+                                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                                        {user.name}
+                                    </td>
+                                    <td className="px-6 py-4 text-sm text-gray-500">
+                                        {user.email}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <button
+                                            className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-4 rounded"
+                                            onClick={() => handleBlockUser(user.email)}
+                                        >
+                                            Block
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );

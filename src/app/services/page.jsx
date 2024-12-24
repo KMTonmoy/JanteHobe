@@ -8,7 +8,7 @@ const OurServices = () => {
             title: "Learn English Grammar",
             description: "Master English grammar with structured lessons, quizzes, and real-life examples designed for all levels. Our courses cover everything from basic tenses to advanced sentence structures.",
             icon: "📚",
-            image: "https://play-lh.googleusercontent.com/AprwM9xSIYiTOjRSDImAK3t6ASy-r3CZz6YlILPOJWx_1yMz8HsKpzc1WW6tcY8UDA",
+            image: "https://mytutorsource.com/blog-images/wp-content/uploads/2022/01/noun.jpg",
         },
         {
             title: "Improve Speaking Skills",

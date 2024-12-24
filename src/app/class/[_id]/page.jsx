@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 
 const Page = ({ params }) => {
-    const { _id } =  params;
+    const { _id } = params;
 
     const [editorContents, setEditorContents] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -35,7 +35,7 @@ const Page = ({ params }) => {
         });
     };
 
-    const filteredContent = editorContents.filter(content => 
+    const filteredContent = editorContents.filter(content =>
         content.className === _id && content.chapterName.toLowerCase().includes(searchQuery.toLowerCase())
     );
 

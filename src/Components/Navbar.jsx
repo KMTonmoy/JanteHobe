@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
@@ -28,7 +28,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className="bg-[#EBF3FF]  capitalize shadow-md  w-full top-0 z-50 px-6 py-4 flex justify-between items-center font-inter"
+      className="bg-[#EBF3FF] capitalize shadow-md w-full top-0 z-50 px-6 py-4 flex justify-between items-center font-inter"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -52,7 +52,7 @@ const Navbar = () => {
         className="hidden lg:flex gap-6 text-gray-700"
         whileHover={{ opacity: 1 }}
       >
-        {['Home', 'class', 'About Us', 'Services', 'Contact',].map((link) => (
+        {['Home', 'About Us', 'Services', 'Contact'].map((link) => (
           <motion.div
             key={link}
             whileHover={{ y: -3, color: '#7e22ce' }}
@@ -67,11 +67,25 @@ const Navbar = () => {
             </Link>
           </motion.div>
         ))}
+
+        {/* Book link */}
+        <motion.div
+          whileHover={{ y: -3, color: '#7e22ce' }}
+          transition={{ type: 'spring', stiffness: 300 }}
+        >
+          <Link
+            href='/class'
+            className={`hover:text-purple-700 ${activeLink === 'Book' ? 'text-purple-700 underline' : ''}`}
+            onClick={() => handleLinkClick('Book')}
+          >
+            Book
+          </Link>
+        </motion.div>
+
         {user && (
           <Link
             href='/dashboard'
-            className={`hover:text-purple-700 `}
-         
+            className={`hover:text-purple-700`}
           >
             Dashboard
           </Link>
@@ -124,7 +138,7 @@ const Navbar = () => {
         transition={{ type: 'spring', damping: 20, stiffness: 100 }}
       >
         <div className="flex flex-col gap-4 text-gray-800">
-          {['Home', 'class', 'About Us', 'Services', 'Contact'].map((link) => (
+          {['Home', 'About Us', 'Services', 'Contact'].map((link) => (
             <motion.div
               key={link}
               whileHover={{ x: 10, color: '#7e22ce' }}
@@ -142,6 +156,23 @@ const Navbar = () => {
               </Link>
             </motion.div>
           ))}
+          
+          {/* Book link in mobile menu */}
+          <motion.div
+            whileHover={{ y: -3, color: '#7e22ce' }}
+            transition={{ type: 'spring', stiffness: 300 }}
+          >
+            <Link
+              href='/class'
+              className={`text-lg font-medium ${activeLink === 'Book' ? 'text-purple-700 underline' : ''}`}
+              onClick={() => {
+                handleLinkClick('Book');
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              Book
+            </Link>
+          </motion.div>
 
           {!user ? (
             <motion.button

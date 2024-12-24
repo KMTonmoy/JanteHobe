@@ -37,7 +37,7 @@ const Banner = () => {
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
         {slides.map(slide => (
-          <div key={slide.id} className='w-full h-full flex-shrink-0 relative'>
+          <div key={slide._id} className='w-full h-full flex-shrink-0 relative'>
             <img
               src={slide.url}
               alt={slide.text}

@@ -85,7 +85,11 @@ const Page = () => {
                                     }}
                                 >
                                     <td className="px-6 py-4">
-                                        <img src={classItem.image || 'https://via.placeholder.com/150'} alt={classItem.className} className="w-16 h-16 object-cover rounded-full" />
+                                        <img
+                                            src={classItem.image || 'https://via.placeholder.com/150'}
+                                            alt={classItem.className}
+                                            className="w-16 h-16 object-cover rounded-full"
+                                        />
                                     </td>
                                     <td className="px-6 py-4 text-gray-800">{classItem.className}</td>
                                     <td className="px-6 py-4 text-gray-600">{classItem.description}</td>
@@ -114,7 +118,13 @@ const Page = () => {
                                 delay: index * 0.2
                             }}
                         >
-                            <img src={classItem.image || 'https://via.placeholder.com/150'} alt={classItem.className} className="w-full h-40 object-cover" />
+                            <div className="h-64 w-full">
+                                <img
+                                    src={classItem.image || 'https://via.placeholder.com/150'}
+                                    alt={classItem.className}
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
                             <div className="p-6">
                                 <h2 className="text-2xl font-semibold text-gray-800">{classItem.className}</h2>
                                 <p className="text-gray-600 mt-2">{classItem.description}</p>

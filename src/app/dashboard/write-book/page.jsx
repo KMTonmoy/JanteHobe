@@ -130,12 +130,12 @@
 'use client'
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false });
 
 const Page = () => {
     const [content, setContent] = useState('');
-    const [statusMessage, setStatusMessage] = useState('');
     const [className, setClassName] = useState('');
     const [chapterName, setChapterName] = useState('');
     const [chapterNo, setChapterNo] = useState('');
@@ -146,8 +146,10 @@ const Page = () => {
         toolbarSticky: true,
         buttons: [
             'bold', 'italic', 'underline', 'strikeThrough', 'superscript', 'subscript', '|',
-            'align', 'outdent', 'indent', 'font', 'fontsize', 'fontcolor', 'backcolor', 'paragraph', '|',
-            'image', 'file', 'video', 'table', 'link', 'unlink', '|',
+            'font', 'fontsize', 'fontcolor', 'backcolor', '|', // Added font and background color options
+            'align', 'outdent', 'indent', '|', 
+            'table', 'addcolumnbefore', 'addcolumnafter', 'addrowbefore', 'addrowafter', 'deletecolumn', 'deleterow', 'deletetable', '|', // Enhanced table buttons
+            'image', 'file', 'video', 'link', 'unlink', '|',
             'undo', 'redo', 'cut', 'copy', 'paste', 'hr', 'eraser', 'fullsize', '|',
             'source', 'print', 'preview', 'selectall'
         ],
@@ -166,13 +168,20 @@ const Page = () => {
 
     const saveContent = async () => {
         if (!content || !className || !chapterName || !chapterNo) {
-            setStatusMessage('Please fill all fields: class, chapter name, chapter number, and content.');
+            Swal.fire({
+                icon: 'warning',
+                title: 'Incomplete Fields',
+                text: 'Please fill all fields: class, chapter name, chapter number, and content.',
+            });
             return;
         }
 
-        // Ensure chapter number is a valid number
         if (isNaN(chapterNo)) {
-            setStatusMessage('Please enter a valid chapter number.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Chapter Number',
+                text: 'Please enter a valid chapter number.',
+            });
             return;
         }
 
@@ -188,12 +197,24 @@ const Page = () => {
             const data = await response.json();
 
             if (response.ok) {
-                setStatusMessage('Content saved successfully!');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Content Saved',
+                    text: 'Your content was saved successfully!',
+                });
             } else {
-                setStatusMessage(`Error saving content: ${data.error}`);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error Saving Content',
+                    text: data.error || 'An error occurred while saving the content.',
+                });
             }
         } catch (error) {
-            setStatusMessage(`Error: ${error.message}`);
+            Swal.fire({
+                icon: 'error',
+                title: 'Network Error',
+                text: `An error occurred: ${error.message}`,
+            });
         }
     };
 
@@ -242,17 +263,11 @@ const Page = () => {
             />
 
             <button
-                className='mt-4 px-6 py-2 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none'
+                className='mt-4 px-6 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none'
                 onClick={saveContent}
             >
                 Save Content
             </button>
-
-            {statusMessage && (
-                <div className='mt-4 text-sm text-red-500'>
-                    {statusMessage}
-                </div>
-            )}
         </div>
     );
 };

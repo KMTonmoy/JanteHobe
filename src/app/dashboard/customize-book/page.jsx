@@ -11,8 +11,8 @@ const Page = () => {
           <thead>
             <tr className="bg-gray-200">
               <th className="px-6 py-3 text-left">Class</th>
-              <th className="px-6 py-3 text-left">Assign</th>
-              <th className="px-6 py-3 text-left">End Date</th>
+              <th className="px-6 py-3 text-left">Total Chapters</th>
+
               <th className="px-6 py-3 text-left">Action</th>
             </tr>
           </thead>
@@ -21,7 +21,7 @@ const Page = () => {
               <tr key={id} className="border-t">
                 <td className="px-6 py-4 text-lg">{`Class ${id}`}</td>
                 <td className="px-6 py-4 text-lg">N/A</td>
-                <td className="px-6 py-4 text-lg">N/A</td>
+
                 <td className="px-6 py-4">
                   <Link href={`/dashboard/customize-book/${id}`}>
                     <button className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-lg hover:bg-indigo-700 focus:outline-none">

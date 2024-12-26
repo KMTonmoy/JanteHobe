@@ -65,7 +65,7 @@ const DashboardPage = () => {
                             </p>
                         </div>
                         <div className="bg-gradient-to-r from-purple-700 to-indigo-700 text-white p-10 rounded-lg shadow-lg flex flex-col justify-center items-center">
-                            <h3 className="text-xl font-semibold mb-4">Total Classes</h3>
+                            <h3 className="text-xl font-semibold mb-4">Total Chapters Added</h3>
                             <p className="text-3xl font-bold">
                                 <CountUp end={totalClasses} duration={2} />
                             </p>

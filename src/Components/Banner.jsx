@@ -31,7 +31,7 @@ const Banner = () => {
   if (slides.length === 0) return <div>Loading...</div>
 
   return (
-    <div className='relative rounded-lg my-10 w-full max-w-7xl mx-auto h-[600px] overflow-hidden'>
+    <div className='relative rounded-lg my-6 sm:my-10 w-full max-w-7xl mx-auto h-[300px] sm:h-[600px] overflow-hidden'>
       <div
         className='w-full h-full flex transition-transform duration-500'
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -43,26 +43,26 @@ const Banner = () => {
               alt={slide.text}
               className='w-full h-full object-cover'
             />
-            <div className='absolute inset-0 flex items-center pl-12 bg-black bg-opacity-50'>
-              <div className='max-w-lg text-white space-y-4 md:ml-10 md:text-left text-center'>
-                <h2 className='text-2xl md:text-4xl font-bold'>{slide.heading}</h2>
-                <p className='text-base md:text-lg'>{slide.description}</p>
+            <div className='absolute inset-0 flex items-center bg-black bg-opacity-50'>
+              <div className='w-full px-4 sm:px-12 text-white space-y-2 sm:space-y-4 text-center sm:text-left'>
+                <h2 className='text-lg sm:text-2xl md:text-4xl font-bold'>{slide.heading}</h2>
+                <p className='text-sm sm:text-base md:text-lg'>{slide.description}</p>
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="absolute bottom-4 right-6 flex space-x-4">
+      <div className="absolute bottom-2 sm:bottom-4 right-4 sm:right-6 flex space-x-2 sm:space-x-4">
         <button
           onClick={handlePrev}
-          className='bg-black text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-700 focus:outline-none z-10'
+          className='bg-black text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full shadow-lg hover:bg-gray-700 focus:outline-none z-10'
         >
           &#8592;
         </button>
         <button
           onClick={handleNext}
-          className='bg-black text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-700 focus:outline-none z-10'
+          className='bg-black text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full shadow-lg hover:bg-gray-700 focus:outline-none z-10'
         >
           &#8594;
         </button>
